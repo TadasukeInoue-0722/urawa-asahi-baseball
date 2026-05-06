@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>浦和朝野球連盟 | URAWA ASAHI BASEBALL LEAGUE</title>
+<style>
+  /* ===== RESET & BASE ===== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0a1628;
+    --navy2: #122040;
+    --red: #c8102e;
+    --gold: #f5b800;
+    --white: #ffffff;
+    --light: #f0f4f8;
+    --gray: #8a9bb0;
+    --border: #1e3054;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', 'Meiryo', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    line-height: 1.7;
+  }
+
+  /* ===== HEADER ===== */
+  header {
+    background: linear-gradient(135deg, #060e1c 0%, #0a1e3d 50%, #0d1f3c 100%);
+    border-bottom: 3px solid var(--gold);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  }
+  .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 24px;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    text-decoration: none;
+  }
+  .logo-emblem {
+    width: 56px;
+    height: 56px;
+    background: radial-gradient(circle, var(--gold) 0%, #c98f00 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    box-shadow: 0 0 16px rgba(245,184,0,0.4);
+    flex-shrink: 0;
+  }
+  .logo-text { color: var(--white); }
+  .logo-text .en { font-size: 10px; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; }
+  .logo-text .ja { font-size: 20px; font-weight: 900; letter-spacing: 2px; }
+  .logo-text .sub { font-size: 10px; color: var(--gray); }
+  nav { display: flex; gap: 4px; flex-wrap: wrap; }
+  nav a {
+    color: #adc4e0;
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  nav a:hover { background: var(--gold); color: var(--navy); font-weight: 700; }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: linear-gradient(160deg, #060e1c 0%, #0d2247 40%, #091830 100%);
+    padding: 80px 24px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '⚾';
+    position: absolute;
+    font-size: 400px;
+    opacity: 0.03;
+    top: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .hero-badge {
+    display: inline-block;
+    background: var(--red);
+    color: var(--white);
+    font-size: 12px;
+    padding: 4px 16px;
+    border-radius: 20px;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+  .hero h1 {
+    font-size: clamp(28px, 5vw, 56px);
+    font-weight: 900;
+    letter-spacing: 4px;
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+  .hero h1 span { color: var(--gold); }
+  .hero .en-title {
+    font-size: 14px;
+    letter-spacing: 6px;
+    color: var(--gray);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+  .hero-motto {
+    font-size: clamp(20px, 4vw, 36px);
+    font-weight: 900;
+    color: var(--gold);
+    letter-spacing: 8px;
+    margin: 20px 0 8px;
+    text-shadow: 0 0 30px rgba(245,184,0,0.3);
+  }
+  .hero-motto-sub {
+    font-size: 13px;
+    color: var(--gray);
+    letter-spacing: 3px;
+  }
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+  }
+  .hero-stat { text-align: center; }
+  .hero-stat .num {
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .hero-stat .label { font-size: 11px; color: var(--gray); letter-spacing: 1px; margin-top: 4px; }
+  .divider { width: 60px; height: 3px; background: linear-gradient(90deg, var(--red), var(--gold)); margin: 0 auto 12px; }
+
+  /* ===== SECTION ===== */
+  section { padding: 60px 24px; }
+  section:nth-child(even) { background: rgba(255,255,255,0.02); }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-header { text-align: center; margin-bottom: 40px; }
+  .section-header .tag {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .section-header h2 {
+    font-size: clamp(22px, 4vw, 36px);
+    font-weight: 900;
+    letter-spacing: 3px;
+  }
+  .section-header h2 .accent { color: var(--gold); }
+
+  /* ===== CARDS ===== */
+  .card {
+    background: linear-gradient(135deg, #122040, #0d1a30);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+
+  /* ===== TEAM GRID ===== */
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+  }
+  .team-card {
+    background: linear-gradient(135deg, #122040, #0d1a30);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--gold);
+    border-radius: 10px;
+    padding: 20px 16px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .team-card:hover { transform: translateY(-4px); box-shadow: 0 10px 28px rgba(0,0,0,0.5); border-top-color: var(--red); }
+  .team-icon { font-size: 36px; margin-bottom: 10px; }
+  .team-name { font-size: 15px; font-weight: 900; letter-spacing: 1px; margin-bottom: 6px; }
+  .team-contact { font-size: 11px; color: var(--gray); }
+  .team-contact a { color: var(--gold); text-decoration: none; }
+
+  /* ===== TABLE ===== */
+  .table-wrap { overflow-x: auto; border-radius: 10px; border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; min-width: 500px; }
+  thead tr { background: linear-gradient(90deg, var(--navy2), #1a3060); }
+  thead th {
+    padding: 12px 14px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: var(--gold);
+    text-align: center;
+    white-space: nowrap;
+    border-bottom: 2px solid var(--gold);
+  }
+  tbody tr { border-bottom: 1px solid rgba(255,255,255,0.05); transition: background 0.15s; }
+  tbody tr:hover { background: rgba(245,184,0,0.05); }
+  tbody tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+  tbody tr:nth-child(even):hover { background: rgba(245,184,0,0.05); }
+  tbody td {
+    padding: 11px 14px;
+    font-size: 13px;
+    text-align: center;
+    color: #ccdaeb;
+    vertical-align: middle;
+  }
+  tbody td.left { text-align: left; }
+  .rank-1 td { color: var(--gold) !important; font-weight: 700; }
+  .rank-2 td { color: #e0e0e0 !important; font-weight: 600; }
+  .rank-3 td { color: #cd7f32 !important; font-weight: 600; }
+
+  /* ===== SCHEDULE TABS ===== */
+  .tab-wrap { margin-bottom: 20px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .tab-btn {
+    padding: 8px 20px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--gray);
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 1px;
+  }
+  .tab-btn.active, .tab-btn:hover {
+    background: var(--gold);
+    color: var(--navy);
+    border-color: var(--gold);
+  }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* ===== STANDINGS ===== */
+  .standings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  @media (max-width: 700px) { .standings-grid { grid-template-columns: 1fr; } }
+
+  /* ===== AWARDS ===== */
+  .awards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+  .award-card {
+    background: linear-gradient(135deg, #122040, #0d1a30);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .award-header {
+    background: linear-gradient(90deg, var(--red), #8b0000);
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 2px;
+  }
+  .award-row {
+    display: flex;
+    align-items: center;
+    padding: 10px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    gap: 12px;
+  }
+  .award-rank {
+    font-size: 20px;
+    font-weight: 900;
+    width: 32px;
+    text-align: center;
+  }
+  .award-rank.r1 { color: var(--gold); }
+  .award-rank.r2 { color: #d0d0d0; }
+  .award-rank.r3 { color: #cd7f32; }
+  .award-info { flex: 1; }
+  .award-player { font-size: 14px; font-weight: 700; }
+  .award-team { font-size: 11px; color: var(--gray); }
+  .award-val { font-size: 18px; font-weight: 900; color: var(--gold); }
+
+  /* ===== OFFICERS ===== */
+  .officer-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+  .officer-card {
+    background: linear-gradient(135deg, #122040, #0d1a30);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--gold);
+    border-radius: 8px;
+    padding: 16px 18px;
+  }
+  .officer-role { font-size: 11px; color: var(--gold); letter-spacing: 2px; margin-bottom: 4px; }
+  .officer-name { font-size: 17px; font-weight: 900; }
+
+  /* ===== HISTORY TABLE ===== */
+  .history-table td.winner { color: var(--gold); font-weight: 700; }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: #060e1c;
+    border-top: 3px solid var(--gold);
+    padding: 40px 24px;
+    text-align: center;
+  }
+  .footer-logo { font-size: 22px; font-weight: 900; color: var(--gold); letter-spacing: 3px; margin-bottom: 8px; }
+  .footer-motto { font-size: 18px; color: var(--gold); letter-spacing: 6px; margin-bottom: 6px; }
+  .footer-sub { font-size: 11px; color: var(--gray); letter-spacing: 2px; }
+  .footer-copy { margin-top: 24px; font-size: 11px; color: #3a5070; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .header-inner { flex-direction: column; gap: 12px; }
+    nav { justify-content: center; }
+    .hero-stats { gap: 24px; }
+  }
+
+  /* ===== MATCH RESULT BADGE ===== */
+  .result-win { color: #4fc86a; font-weight: 700; }
+  .result-lose { color: #f05; font-weight: 700; }
+  .result-draw { color: var(--gold); font-weight: 700; }
+
+  /* scroll indicator */
+  .scroll-top {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--gold);
+    color: var(--navy);
+    border: none;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    z-index: 999;
+    transition: opacity 0.3s;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="#top" class="logo">
+      <div class="logo-emblem">⚾</div>
+      <div class="logo-text">
+        <div class="en">URAWA ASAHI BASEBALL LEAGUE</div>
+        <div class="ja">浦和朝野球連盟</div>
+        <div class="sub">第64回大会 令和8年度</div>
+      </div>
+    </a>
+    <nav>
+      <a href="#about">連盟について</a>
+      <a href="#officers">役員</a>
+      <a href="#teams">チーム</a>
+      <a href="#schedule">日程</a>
+      <a href="#standings">順位</a>
+      <a href="#awards">個人成績</a>
+      <a href="#history">過去の戦績</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="top" class="hero">
+  <div class="hero-badge">第64回大会 ● 令和8年度</div>
+  <h1>浦和<span>朝</span>野球連盟</h1>
+  <div class="en-title">URAWA ASAHI BASEBALL LEAGUE</div>
+  <div class="divider"></div>
+  <div class="hero-motto">心是為常楽</div>
+  <div class="hero-motto-sub">心は晴れ常に楽しみと為す</div>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="num">64</div><div class="label">回大会</div></div>
+    <div class="hero-stat"><div class="num">9</div><div class="label">チーム参加</div></div>
+    <div class="hero-stat"><div class="num">60<span style="font-size:18px">+</span></div><div class="label">年の歴史</div></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="tag">About</div>
+      <h2>連盟<span class="accent">について</span></h2>
+      <div class="divider"></div>
+    </div>
+    <div style="max-width:700px; margin:0 auto; text-align:center; color:#adc4e0; font-size:15px; line-height:2;">
+      <p>浦和朝野球連盟は、さいたま市を拠点に60年以上の歴史を誇る軟式野球連盟です。</p>
+      <p style="margin-top:16px;">年齢・職業・性別を問わず、野球を通じて仲間と協調する精神を育む場として、地域に根ざした活動を続けています。</p>
+      <p style="margin-top:16px; font-size:13px; color:#6a82a0;">連盟訓：<strong style="color:var(--gold)">心是為常楽</strong>　―　私たちは野球を楽しむために集いました。</p>
+    </div>
+  </div>
+</section>
+
+<!-- OFFICERS -->
+<section id="officers" style="background:rgba(255,255,255,0.02)">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="tag">Officers</div>
+      <h2>連盟<span class="accent">役員</span></h2>
+      <div class="divider"></div>
+    </div>
+    <div class="officer-grid">
+      <div class="officer-card"><div class="officer-role">会　長</div><div class="officer-name">林　薫</div></div>
+      <div class="officer-card"><div class="officer-role">副会長</div><div class="officer-name">斎藤 賢治</div></div>
+      <div class="officer-card" style="border-left-color:var(--gray)"><div class="officer-role">常任理事（財務）</div><div class="officer-name">野口 則勝</div></div>
+      <div class="officer-card" style="border-left-color:var(--gray)"><div class="officer-role">常任理事（財務）</div><div class="officer-name">千野 健一</div></div>
+      <div class="officer-card" style="border-left-color:var(--gray)"><div class="officer-role">常任理事（運営）</div><div class="officer-name">新山 彰徳</div></div>
+      <div class="officer-card" style="border-left-color:var(--gray)"><div class="officer-role">常任理事（運営）</div><div class="officer-name">永堀 隆之</div></div>
+      <div class="officer-card" style="border-left-color:var(--gray)"><div class="officer-role">常任理事（総務）</div><div class="officer-name">塩川 正弘</div></div>
+      <div class="officer-card" style="border-left-color:#5a7fa0"><div class="officer-role">監　査</div><div class="officer-name">五十嵐 昭夫</div></div>
+      <div class="officer-card" style="border-left-color:#3a5a7a"><div class="officer-role">理　事</div><div class="officer-name">東館 修一</div></div>
+      <div class="officer-card" style="border-left-color:#3a5a7a"><div class="officer-role">理　事</div><div class="officer-name">遊馬 隆慈</div></div>
+      <div class="officer-card" style="border-left-color:#3a5a7a"><div class="officer-role">理　事</div><div class="officer-name">小川 雄也</div></div>
+      <div class="officer-card" style="border-left-color:#3a5a7a"><div class="officer-role">理　事</div><div class="officer-name">中村 智之</div></div>
+      <div class="officer-card" style="border-left-color:#3a5a7a"><div class="officer-role">理　事</div><div class="officer-name">水谷 慎一</div></div>
+      <div class="officer-card" style="border-left-color:#3a5a7a"><div class="officer-role">理　事</div><div class="officer-name">岡　敦</div></div>
+      <div class="officer-card" style="border-left-color:#3a5a7a"><div class="officer-role">理　事</div><div class="officer-name">松本　敏</div></div>
+      <div class="officer-card" style="border-left-color:#3a5a7a"><div class="officer-role">理　事</div><div class="officer-name">清水 裕志</div></div>
+      <div class="officer-card" style="border-left-color:#2a4560"><div class="officer-role">相談役</div><div class="officer-name">吉野 幸雄</div></div>
+      <div class="officer-card" style="border-left-color:#2a4560"><div class="officer-role">相談役</div><div class="officer-name">佐々木 重光</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAMS -->
+<section id="teams">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="tag">Teams</div>
+      <h2>チーム<span class="accent">一覧</span></h2>
+      <div class="divider"></div>
+      <p style="font-size:12px;color:var(--gray);margin-top:8px;">※個人情報保護のため、電話番号は非掲載。連絡は連盟を通じてお願いします。</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-icon">⚾</div>
+        <div class="team-name">原山カッターズ</div>
+        <div class="team-contact">監督：斎藤 賢治</div>
+      </div>
+      <div class="team-card">
+        <div class="team-icon">🏗️</div>
+        <div class="team-name">一球建築士</div>
+        <div class="team-contact">監督：井原 雪</div>
+      </div>
+      <div class="team-card">
+        <div class="team-icon">🏠</div>
+        <div class="team-name">ホーミー</div>
+        <div class="team-contact">監督：小川 雄也</div>
+      </div>
+      <div class="team-card">
+        <div class="team-icon">🔧</div>
+        <div class="team-name">ツミタクラブ</div>
+        <div class="team-contact">監督：積田 鉄也</div>
+      </div>
+      <div class="team-card">
+        <div class="team-icon">🐯</div>
+        <div class="team-name">美園タイガース</div>
+        <div class="team-contact">監督：近藤　豊</div>
+      </div>
+      <div class="team-card">
+        <div class="team-icon">⛳</div>
+        <div class="team-name">浦和GOB</div>
+        <div class="team-contact">監督：長谷部 千弘</div>
+      </div>
+      <div class="team-card">
+        <div class="team-icon">🦅</div>
+        <div class="team-name">FODイーグルス</div>
+        <div class="team-contact">監督：清水 裕志</div>
+      </div>
+      <div class="team-card">
+        <div class="team-icon">💪</div>
+        <div class="team-name">原山ダンプス</div>
+        <div class="team-contact">監督：永堀 隆之</div>
+      </div>
+      <div class="team-card">
+        <div class="team-icon">🏋️</div>
+        <div class="team-name">本太育成会</div>
+        <div class="team-contact">監督：新山 彰徳</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section id="schedule" style="background:rgba(255,255,255,0.02)">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="tag">Schedule</div>
+      <h2>試合<span class="accent">日程</span> <span style="font-size:16px;color:var(--gray)">令和8年度</span></h2>
+      <div class="divider"></div>
+    </div>
+    <div class="tab-wrap">
+      <button class="tab-btn active" onclick="showTab('apr')">4月</button>
+      <button class="tab-btn" onclick="showTab('may')">5月</button>
+      <button class="tab-btn" onclick="showTab('jun')">6月</button>
+      <button class="tab-btn" onclick="showTab('jul')">7月</button>
+      <button class="tab-btn" onclick="showTab('aug')">8月</button>
+    </div>
+
+    <!-- 4月 -->
+    <div id="tab-apr" class="tab-content active">
+      <div class="table-wrap">
+        <table>
+          <thead><tr>
+            <th>日付</th><th>曜</th><th>先攻</th><th>後攻</th><th>球場</th><th>審判（主審）</th><th>記録</th>
+          </tr></thead>
+          <tbody>
+            <tr><td>4/4</td><td>土</td><td class="left">原山カッターズ</td><td class="left">原山ダンプス</td><td>○</td><td>松本</td><td>野口</td></tr>
+            <tr><td>4/4</td><td>土</td><td class="left">ホーミー</td><td class="left">美園タイガース</td><td></td><td>清水</td><td>高橋</td></tr>
+            <tr><td>4/18</td><td>土</td><td class="left">一球建築士</td><td class="left">本太育成会</td><td></td><td>積田</td><td>中村</td></tr>
+            <tr><td>4/18</td><td>土</td><td class="left">浦和GOB</td><td class="left">FODイーグルス</td><td></td><td>吉野</td><td>永堀</td></tr>
+            <tr><td>4/25</td><td>土</td><td class="left">美園タイガース</td><td class="left">本太育成会</td><td>×</td><td>小川</td><td>野口</td></tr>
+            <tr><td>4/26</td><td>日</td><td class="left">ホーミー</td><td class="left">浦和GOB</td><td>×</td><td>積田</td><td>佐々木</td></tr>
+            <tr><td>4/29</td><td>水</td><td class="left">原山カッターズ</td><td class="left">FODイーグルス</td><td></td><td>永堀</td><td>吉野</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:11px;color:var(--gray);margin-top:8px;">※4/25(土)・26(日)・29(水祝)の試合は、7:30までにグランド撤収（試合開始時間が早まる可能性有り）</p>
+    </div>
+
+    <!-- 5月 -->
+    <div id="tab-may" class="tab-content">
+      <div class="table-wrap">
+        <table>
+          <thead><tr>
+            <th>日付</th><th>曜</th><th>先攻</th><th>後攻</th><th>球場</th><th>審判（主審）</th><th>記録</th>
+          </tr></thead>
+          <tbody>
+            <tr><td>5/9</td><td>土</td><td class="left">一球建築士</td><td class="left">原山ダンプス</td><td>○</td><td>小川</td><td>高橋</td></tr>
+            <tr><td>5/10</td><td>日</td><td class="left">原山カッターズ</td><td class="left">浦和GOB</td><td></td><td>清水</td><td>中村</td></tr>
+            <tr><td>5/13</td><td>水</td><td class="left">ツミタクラブ</td><td class="left">本太育成会</td><td></td><td>佐々木</td><td>野口</td></tr>
+            <tr><td>5/16</td><td>土</td><td class="left">一球建築士</td><td class="left">美園タイガース</td><td></td><td>松本</td><td>高橋</td></tr>
+            <tr><td>5/17</td><td>日</td><td class="left">ホーミー</td><td class="left">FODイーグルス</td><td></td><td>積田</td><td>佐々木</td></tr>
+            <tr><td>5/27</td><td>水</td><td class="left">ツミタクラブ</td><td class="left">ホーミー</td><td>○</td><td>新山</td><td>水谷</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 6月 -->
+    <div id="tab-jun" class="tab-content">
+      <div class="table-wrap">
+        <table>
+          <thead><tr>
+            <th>日付</th><th>曜</th><th>先攻</th><th>後攻</th><th>球場</th><th>審判（主審）</th><th>記録</th>
+          </tr></thead>
+          <tbody>
+            <tr><td>6/6</td><td>土</td><td class="left">原山ダンプス</td><td class="left">本太育成会</td><td>○</td><td>小川</td><td>中村</td></tr>
+            <tr><td>6/7</td><td>日</td><td class="left">原山カッターズ</td><td class="left">美園タイガース</td><td></td><td>清水</td><td>高橋</td></tr>
+            <tr style="background:rgba(245,184,0,0.06)"><td colspan="7" style="text-align:left;color:var(--gold);font-size:12px;padding:8px 14px;">※6/6(土)・7(日)は理事長杯</td></tr>
+            <tr><td>6/13</td><td>土</td><td class="left">ホーミー</td><td class="left">原山ダンプス</td><td></td><td>松本</td><td>野口</td></tr>
+            <tr><td>6/14</td><td>日</td><td class="left">一球建築士</td><td class="left">FODイーグルス</td><td></td><td>永堀</td><td>佐々木</td></tr>
+            <tr><td>6/20</td><td>土</td><td class="left">原山カッターズ</td><td class="left">本太育成会</td><td>○</td><td>小川</td><td>吉野</td></tr>
+            <tr><td>6/21</td><td>日</td><td class="left">一球建築士</td><td class="left">浦和GOB</td><td></td><td>清水</td><td>野口</td></tr>
+            <tr><td>6/24</td><td>水</td><td class="left">ツミタクラブ</td><td class="left">FODイーグルス</td><td>○</td><td>佐々木</td><td>水谷</td></tr>
+            <tr><td>6/27</td><td>土</td><td class="left">ホーミー</td><td class="left">本太育成会</td><td></td><td>積田</td><td>高橋</td></tr>
+            <tr><td>6/28</td><td>日</td><td class="left">美園タイガース</td><td class="left">浦和GOB</td><td></td><td>吉野</td><td>永堀</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 7月 -->
+    <div id="tab-jul" class="tab-content">
+      <div class="table-wrap">
+        <table>
+          <thead><tr>
+            <th>日付</th><th>曜</th><th>先攻</th><th>後攻</th><th>球場</th><th>審判（主審）</th><th>記録</th>
+          </tr></thead>
+          <tbody>
+            <tr><td>7/4</td><td>土</td><td class="left">一球建築士</td><td class="left">ホーミー</td><td>○</td><td>松本</td><td>高橋</td></tr>
+            <tr><td>7/5</td><td>日</td><td class="left">FODイーグルス</td><td class="left">原山ダンプス</td><td></td><td>積田</td><td>佐々木</td></tr>
+            <tr><td>7/8</td><td>水</td><td class="left">ツミタクラブ</td><td class="left">原山カッターズ</td><td>○</td><td>新山</td><td>野口</td></tr>
+            <tr><td>7/21</td><td>火</td><td class="left">ツミタクラブ</td><td class="left">一球建築士</td><td>○</td><td>新山</td><td>水谷</td></tr>
+            <tr><td>7/25</td><td>土</td><td class="left">原山カッターズ</td><td class="left">ホーミー</td><td></td><td>松本</td><td>吉野</td></tr>
+            <tr><td>7/26</td><td>日</td><td class="left">浦和GOB</td><td class="left">本太育成会</td><td></td><td>積田</td><td>中村</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 8月 -->
+    <div id="tab-aug" class="tab-content">
+      <div class="table-wrap">
+        <table>
+          <thead><tr>
+            <th>日付</th><th>曜</th><th>先攻</th><th>後攻</th><th>球場</th><th>審判（主審）</th><th>記録</th>
+          </tr></thead>
+          <tbody>
+            <tr><td>8/1</td><td>土</td><td class="left">美園タイガース</td><td class="left">原山ダンプス</td><td>○</td><td>小川</td><td>野口</td></tr>
+            <tr><td>8/2</td><td>日</td><td class="left">FODイーグルス</td><td class="left">本太育成会</td><td></td><td>永堀</td><td>佐々木</td></tr>
+            <tr><td>8/9</td><td>日</td><td class="left">浦和GOB</td><td class="left">原山ダンプス</td><td></td><td>清水</td><td>高橋</td></tr>
+            <tr style="background:rgba(245,184,0,0.06)"><td colspan="7" style="text-align:left;color:var(--gold);font-size:12px;padding:8px 14px;">※8/8(土)・9(日)は局大会</td></tr>
+            <tr><td>8/11</td><td>火</td><td class="left">美園タイガース</td><td class="left">FODイーグルス</td><td></td><td>小川</td><td>吉野</td></tr>
+            <tr><td>8/20</td><td>木</td><td class="left">ツミタクラブ</td><td class="left">浦和GOB</td><td>○</td><td>新山</td><td>水谷</td></tr>
+            <tr><td>8/22</td><td>土</td><td class="left">原山カッターズ</td><td class="left">一球建築士</td><td>○</td><td>松本</td><td>中村</td></tr>
+            <tr><td>8/29</td><td>土</td><td class="left">予備日</td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>8/30</td><td>日</td><td class="left">予備日</td><td></td><td></td><td></td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STANDINGS -->
+<section id="standings">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="tag">Standings</div>
+      <h2>順位表 <span class="accent">／</span> 対戦結果</h2>
+      <div class="divider"></div>
+      <p style="font-size:12px;color:var(--gray)">令和7年度 第63回リーグ戦 成績（参考）</p>
+    </div>
+    <div class="standings-grid">
+      <!-- 順位表 -->
+      <div>
+        <h3 style="color:var(--gold);font-size:14px;letter-spacing:2px;margin-bottom:12px;">チーム成績</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>順位</th><th>チーム名</th><th>試合</th><th>勝</th><th>負</th><th>分</th><th>勝率</th></tr></thead>
+            <tbody>
+              <tr class="rank-1"><td>1</td><td class="left">原山カッターズ</td><td>8</td><td>7</td><td>0</td><td>1</td><td>0.937</td></tr>
+              <tr class="rank-2"><td>2</td><td class="left">一球建築士</td><td>8</td><td>7</td><td>1</td><td>0</td><td>0.875</td></tr>
+              <tr class="rank-3"><td>3</td><td class="left">FODイーグルス</td><td>8</td><td>5</td><td>3</td><td>0</td><td>0.625</td></tr>
+              <tr><td>4</td><td class="left">ツミタクラブ</td><td>8</td><td>3</td><td>3</td><td>2</td><td>0.500</td></tr>
+              <tr><td>4</td><td class="left">美園タイガース</td><td>8</td><td>3</td><td>3</td><td>2</td><td>0.500</td></tr>
+              <tr><td>4</td><td class="left">浦和GOB</td><td>8</td><td>3</td><td>3</td><td>2</td><td>0.500</td></tr>
+              <tr><td>7</td><td class="left">原山ダンプス</td><td>8</td><td>1</td><td>7</td><td>0</td><td>0.125</td></tr>
+              <tr><td>8</td><td class="left">ホーミー</td><td>8</td><td>0</td><td>8</td><td>0</td><td>0.000</td></tr>
+              <tr><td>9</td><td class="left">本太育成会</td><td>8</td><td>0</td><td>8</td><td>0</td><td>0.000</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- 個人打撃成績 -->
+      <div>
+        <h3 style="color:var(--gold);font-size:14px;letter-spacing:2px;margin-bottom:12px;">個人打撃成績 TOP10</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>順位</th><th>選手</th><th>チーム</th><th>打数</th><th>安打</th><th>打率</th></tr></thead>
+            <tbody>
+              <tr class="rank-1"><td>1</td><td>新納 瑞雪</td><td class="left">一球建築士</td><td>17</td><td>16</td><td>0.563</td></tr>
+              <tr class="rank-2"><td>2</td><td>蘇武 敏行</td><td class="left">原山カッターズ</td><td>25</td><td>22</td><td>0.545</td></tr>
+              <tr class="rank-3"><td>3</td><td>永井 優</td><td class="left">FODイーグルス</td><td>23</td><td>10</td><td>0.528</td></tr>
+              <tr><td>4</td><td>長谷川 喜善</td><td class="left">一球建築士</td><td>19</td><td>10</td><td>0.526</td></tr>
+              <tr><td>5</td><td>村松 輝</td><td class="left">FODイーグルス</td><td>22</td><td>11</td><td>0.524</td></tr>
+              <tr><td>6</td><td>松本 千穂</td><td class="left">美園タイガース</td><td>26</td><td>24</td><td>0.500</td></tr>
+              <tr><td>7</td><td>白澤 璃</td><td class="left">ホーミー</td><td>18</td><td>17</td><td>0.471</td></tr>
+              <tr><td>8</td><td>佐々木 翔</td><td class="left">美園タイガース</td><td>26</td><td>22</td><td>0.455</td></tr>
+              <tr><td>9</td><td>北山 璃胡</td><td class="left">ホーミー</td><td>22</td><td>11</td><td>0.429</td></tr>
+              <tr><td>10</td><td>澤田 友弥</td><td class="left">一球建築士</td><td>23</td><td>19</td><td>0.421</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section id="awards" style="background:rgba(255,255,255,0.02)">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="tag">Awards / Statistics</div>
+      <h2>個人<span class="accent">成績</span>ベスト3</h2>
+      <div class="divider"></div>
+      <p style="font-size:12px;color:var(--gray)">令和7年度 第63回大会</p>
+    </div>
+    <div class="awards-grid">
+      <!-- 打率 -->
+      <div class="award-card">
+        <div class="award-header">🏆 打率ベスト3</div>
+        <div class="award-row">
+          <div class="award-rank r1">1</div>
+          <div class="award-info"><div class="award-player">新納 瑞雪</div><div class="award-team">一球建築士</div></div>
+          <div class="award-val">.563</div>
+        </div>
+        <div class="award-row">
+          <div class="award-rank r2">2</div>
+          <div class="award-info"><div class="award-player">蘇武 敏行</div><div class="award-team">原山カッターズ</div></div>
+          <div class="award-val">.545</div>
+        </div>
+        <div class="award-row">
+          <div class="award-rank r3">3</div>
+          <div class="award-info"><div class="award-player">永井 優</div><div class="award-team">FODイーグルス</div></div>
+          <div class="award-val">.528</div>
+        </div>
+      </div>
+      <!-- 打点 -->
+      <div class="award-card">
+        <div class="award-header">💥 打点ベスト3</div>
+        <div class="award-row">
+          <div class="award-rank r1">1</div>
+          <div class="award-info"><div class="award-player">蘇武 敏行</div><div class="award-team">原山カッターズ</div></div>
+          <div class="award-val">107pt</div>
+        </div>
+        <div class="award-row">
+          <div class="award-rank r2">2</div>
+          <div class="award-info"><div class="award-player">（詳細は連盟へ）</div><div class="award-team">―</div></div>
+          <div class="award-val">―</div>
+        </div>
+        <div class="award-row">
+          <div class="award-rank r3">3</div>
+          <div class="award-info"><div class="award-player">（詳細は連盟へ）</div><div class="award-team">―</div></div>
+          <div class="award-val">―</div>
+        </div>
+      </div>
+      <!-- 本塁打 -->
+      <div class="award-card">
+        <div class="award-header">💣 本塁打ベスト3</div>
+        <div class="award-row">
+          <div class="award-rank r1">1</div>
+          <div class="award-info"><div class="award-player">蘇武 敏行</div><div class="award-team">原山カッターズ</div></div>
+          <div class="award-val">3本</div>
+        </div>
+        <div class="award-row">
+          <div class="award-rank r2">2</div>
+          <div class="award-info"><div class="award-player">（詳細は連盟へ）</div><div class="award-team">―</div></div>
+          <div class="award-val">―</div>
+        </div>
+        <div class="award-row">
+          <div class="award-rank r3">3</div>
+          <div class="award-info"><div class="award-player">（詳細は連盟へ）</div><div class="award-team">―</div></div>
+          <div class="award-val">―</div>
+        </div>
+      </div>
+      <!-- 投手・勝利数 -->
+      <div class="award-card">
+        <div class="award-header">⚡ 投手 勝利数ベスト3</div>
+        <div class="award-row">
+          <div class="award-rank r1">1</div>
+          <div class="award-info"><div class="award-player">粒来 巧琢</div><div class="award-team">一球建築士</div></div>
+          <div class="award-val">6勝</div>
+        </div>
+        <div class="award-row">
+          <div class="award-rank r2">2</div>
+          <div class="award-info"><div class="award-player">（詳細は連盟へ）</div><div class="award-team">―</div></div>
+          <div class="award-val">―</div>
+        </div>
+        <div class="award-row">
+          <div class="award-rank r3">3</div>
+          <div class="award-info"><div class="award-player">（詳細は連盟へ）</div><div class="award-team">―</div></div>
+          <div class="award-val">―</div>
+        </div>
+      </div>
+      <!-- 投手・防御率 -->
+      <div class="award-card">
+        <div class="award-header">🛡️ 投手 防御率ベスト3</div>
+        <div class="award-row">
+          <div class="award-rank r1">1</div>
+          <div class="award-info"><div class="award-player">粒来 巧琢</div><div class="award-team">一球建築士</div></div>
+          <div class="award-val">―</div>
+        </div>
+        <div class="award-row">
+          <div class="award-rank r2">2</div>
+          <div class="award-info"><div class="award-player">（詳細は連盟へ）</div><div class="award-team">―</div></div>
+          <div class="award-val">―</div>
+        </div>
+        <div class="award-row">
+          <div class="award-rank r3">3</div>
+          <div class="award-info"><div class="award-player">（詳細は連盟へ）</div><div class="award-team">―</div></div>
+          <div class="award-val">―</div>
+        </div>
+      </div>
+      <!-- 個人表彰 -->
+      <div class="award-card">
+        <div class="award-header" style="background:linear-gradient(90deg,#b8950a,#7a5f00);">🎖️ 個人表彰（第63回）</div>
+        <div class="award-row" style="flex-direction:column;align-items:flex-start;gap:6px;">
+          <div><span style="color:var(--gold);font-size:11px;">最高殊勲選手</span><br><span style="font-weight:700;">蘇武 敏行</span><span style="color:var(--gray);font-size:12px;margin-left:8px;">原山カッターズ</span></div>
+          <div style="border-top:1px solid rgba(255,255,255,0.05);width:100%;padding-top:6px;"><span style="color:var(--gold);font-size:11px;">最優秀選手</span><br><span style="font-weight:700;">井原 忠志</span><span style="color:var(--gray);font-size:12px;margin-left:8px;">一球建築士</span></div>
+          <div style="border-top:1px solid rgba(255,255,255,0.05);width:100%;padding-top:6px;"><span style="color:var(--gold);font-size:11px;">首位打者</span><span style="font-weight:700;margin-left:8px;">新納 瑞雪</span><span style="color:var(--gray);font-size:12px;margin-left:8px;">.563</span></div>
+          <div style="border-top:1px solid rgba(255,255,255,0.05);width:100%;padding-top:6px;"><span style="color:var(--gold);font-size:11px;">打点王</span><span style="font-weight:700;margin-left:8px;">蘇武 敏行</span><span style="color:var(--gray);font-size:12px;margin-left:8px;">107pt</span></div>
+          <div style="border-top:1px solid rgba(255,255,255,0.05);width:100%;padding-top:6px;"><span style="color:var(--gold);font-size:11px;">本塁打王</span><span style="font-weight:700;margin-left:8px;">蘇武 敏行</span><span style="color:var(--gray);font-size:12px;margin-left:8px;">3本</span></div>
+          <div style="border-top:1px solid rgba(255,255,255,0.05);width:100%;padding-top:6px;"><span style="color:var(--gold);font-size:11px;">最優秀投手</span><span style="font-weight:700;margin-left:8px;">粒来 巧琢</span><span style="color:var(--gray);font-size:12px;margin-left:8px;">一球建築士　6勝</span></div>
+          <div style="border-top:1px solid rgba(255,255,255,0.05);width:100%;padding-top:6px;"><span style="color:var(--gold);font-size:11px;">優秀投手</span><span style="font-weight:700;margin-left:8px;">粒栄 昌宏</span><span style="color:var(--gray);font-size:12px;margin-left:8px;">ホーミー　5勝</span></div>
+          <div style="border-top:1px solid rgba(255,255,255,0.05);width:100%;padding-top:6px;"><span style="color:var(--gold);font-size:11px;">敢闘チーム</span><span style="font-weight:700;margin-left:8px;">一球建築士</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HISTORY -->
+<section id="history">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="tag">History</div>
+      <h2>過去の<span class="accent">戦績</span></h2>
+      <div class="divider"></div>
+    </div>
+    <div class="table-wrap">
+      <table class="history-table">
+        <thead><tr>
+          <th>回</th><th>年度</th><th>優勝チーム</th><th>トーナメント優勝</th><th>備考</th>
+        </tr></thead>
+        <tbody>
+          <tr><td>63</td><td>令和7年</td><td class="winner left">原山カッターズ</td><td class="winner left">一球建築士</td><td class="left">第14回トーナメント</td></tr>
+          <tr><td>62</td><td>令和6年</td><td class="winner left">（記録掲載予定）</td><td class="left">―</td><td></td></tr>
+          <tr><td>61</td><td>令和5年</td><td class="winner left">（記録掲載予定）</td><td class="left">―</td><td></td></tr>
+          <tr><td>60</td><td>令和4年</td><td class="winner left">（記録掲載予定）</td><td class="left">―</td><td></td></tr>
+          <tr><td>59</td><td>令和3年</td><td class="winner left">（記録掲載予定）</td><td class="left">―</td><td></td></tr>
+          <tr><td>58</td><td>令和2年</td><td class="winner left">（記録掲載予定）</td><td class="left">―</td><td></td></tr>
+          <tr><td colspan="5" style="text-align:center;color:var(--gray);font-size:12px;padding:16px;">過去の詳細記録は連盟事務局にお問い合わせください</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 第14回トーナメント -->
+    <div style="margin-top:40px;">
+      <h3 style="color:var(--gold);font-size:16px;letter-spacing:2px;margin-bottom:20px;text-align:center;">第14回 トーナメント大会 組み合わせ（令和7年度）</h3>
+      <div style="background:linear-gradient(135deg,#122040,#0d1a30);border:1px solid var(--border);border-radius:10px;padding:24px;text-align:center;">
+        <div style="display:inline-block;background:var(--red);color:white;padding:8px 24px;border-radius:6px;font-weight:900;font-size:18px;letter-spacing:3px;margin-bottom:20px;">優 勝：一球建築士</div>
+        <div style="overflow-x:auto;">
+          <table style="min-width:600px;margin:0 auto;border-collapse:collapse;">
+            <tr>
+              <td style="padding:6px 8px;"><div style="border:1px solid var(--gold);padding:6px 12px;border-radius:4px;font-size:12px;color:var(--gold);font-weight:700;">一球建築士</div></td>
+              <td style="padding:4px;font-size:11px;color:var(--gray);">6-0</td>
+              <td rowspan="2" style="padding:4px;font-size:11px;color:var(--gray);">20-0→</td>
+              <td rowspan="4" style="padding:4px;font-size:11px;color:var(--gray);">3-0<br>優勝</td>
+            </tr>
+            <tr>
+              <td style="padding:6px 8px;"><div style="border:1px solid var(--border);padding:6px 12px;border-radius:4px;font-size:12px;">ホーミー</div></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td style="padding:6px 8px;"><div style="border:1px solid var(--border);padding:6px 12px;border-radius:4px;font-size:12px;">本太育成会</div></td>
+              <td style="padding:4px;font-size:11px;color:var(--gray);">6-3</td>
+              <td rowspan="2" style="padding:4px;font-size:11px;color:var(--gray);"></td>
+            </tr>
+            <tr>
+              <td style="padding:6px 8px;"><div style="border:1px solid var(--border);padding:6px 12px;border-radius:4px;font-size:12px;">原山ダンプス</div></td>
+              <td></td>
+            </tr>
+          </table>
+        </div>
+        <p style="font-size:12px;color:var(--gray);margin-top:16px;">（美園タイガース・FODイーグルス・原山カッターズ・浦和GOB・ツミタクラブも参加）</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">浦和朝野球連盟</div>
+  <div class="footer-motto">心是為常楽</div>
+  <div class="footer-sub">URAWA ASAHI BASEBALL LEAGUE — Since 1961</div>
+  <div style="margin-top:20px;font-size:12px;color:#5a7090;line-height:2;">
+    〒 さいたま市浦和区 ／ 事務局：野口 則勝<br>
+    TEL: 090-8103-0218
+  </div>
+  <div class="footer-copy">© 2026 浦和朝野球連盟. All rights reserved.</div>
+</footer>
+
+<button class="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+function showTab(month) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-' + month).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>
